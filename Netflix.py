@@ -6,7 +6,6 @@
 # Tipparat Umrod
 # ---------------------------
 
-
 movies_id = 0
 
 # ------------
@@ -15,18 +14,25 @@ movies_id = 0
 
 def netflix_read (s) :
     """
-    read two ints
+    read an int
     s a string
-    return a list of two ints, representing the beginning and end of a range, [i, j]
+
+    set movies_id to global if read movies_id
+    get customer_id
+    return a list of movies_id, customer_id pair
     """
+    global movies_id
+
     customer_id = 0
+
     if ":" in s :
-        s = s[:-1]
+        s = s[:-2]
         movies_id = int(s)
+        assert movies_id != 0
     else :
+        assert movies_id != 0
         customer_id = int(s)
 
-    #a = s.split()
     return [movies_id, customer_id]
 
 # ------------
@@ -35,16 +41,13 @@ def netflix_read (s) :
 
 def netflix_eval (i, j):
     """
-    i the beginning of the range, inclusive
-    j the end       of the range, inclusive
-    return the max cycle length of the range [i, j]
+    i movies_id
+    j customer_id
+    return rating
     """
+    rating = 4.45566
 
-    assert i > 0
-    assert j > 0
-
-
-    return 1
+    return round(rating, 1)
 
 # -------------
 # netflix_print
@@ -54,11 +57,15 @@ def netflix_print (w, i, j, v) :
     """
     print three ints
     w a writer
-    i the beginning of the range, inclusive
-    j the end       of the range, inclusive
-    v the max cycle length
+    i movies_id
+    j customer_id
+    v rating
     """
-    w.write(str(i) + ":\n" + str(j) + "\n" + str(v) + "\n")
+
+    if (j == 0) :
+        w.write(str(i) + ":\n")
+    else :
+        w.write(str(v) + "\n")
 
 # -------------
 # netflix_solve
@@ -69,7 +76,8 @@ def netflix_solve (r, w) :
     r a reader
     w a writer
     """
+
     for s in r :
         i, j = netflix_read(s)
-        v    = netflix_eval(i, j)          #enable only lazy-cache
+        v = netflix_eval(i, j)
         netflix_print(w, i, j, v)
