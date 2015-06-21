@@ -6,6 +6,9 @@
 # Tipparat Umrod
 # ---------------------------
 
+
+movies_id = 0
+
 # ------------
 # netflix_read
 # ------------
@@ -16,8 +19,15 @@ def netflix_read (s) :
     s a string
     return a list of two ints, representing the beginning and end of a range, [i, j]
     """
-    a = s.split()
-    return [int(a[0]), int(a[1])]
+    customer_id = 0
+    if ":" in s :
+        s = s[:-1]
+        movies_id = int(s)
+    else :
+        customer_id = int(s)
+
+    #a = s.split()
+    return [movies_id, customer_id]
 
 # ------------
 # netflix_eval
@@ -33,38 +43,8 @@ def netflix_eval (i, j):
     assert i > 0
     assert j > 0
 
-    if (i > j) :
-        temp = i
-        i = j
-        j = temp
 
-    max_cycle_len = 1
-
-    for n in range (i, j+1) :
-        c = 1
-        index = n
-
-        if (array[n] != 0) :
-            c = array[n]
-        else :
-            while n > 1 :
-                if (n % 2) == 0 :
-                    n = (n // 2)
-                else :
-                    n = n + (n << 1) + 1
-
-                # lookup the cycle length if the value has been computed
-                if (n <= 1000000 and array[n] != 0) :
-                    c += array[n]
-                    break;
-                    
-                c += 1
-
-        assert c > 0
-        array[index] = c
-        max_cycle_len = max(max_cycle_len, c)
-
-    return max_cycle_len
+    return 1
 
 # -------------
 # netflix_print
@@ -78,7 +58,7 @@ def netflix_print (w, i, j, v) :
     j the end       of the range, inclusive
     v the max cycle length
     """
-    w.write(str(i) + " " + str(j) + " " + str(v) + "\n")
+    w.write(str(i) + ":\n" + str(j) + "\n" + str(v) + "\n")
 
 # -------------
 # netflix_solve
