@@ -1,11 +1,73 @@
-.............
+FFFF.......FF
+======================================================================
+FAIL: test_eval_1 (__main__.TestNetflix)
 ----------------------------------------------------------------------
-Ran 13 tests in 0.003s
+Traceback (most recent call last):
+  File "TestNetflix.py", line 103, in test_eval_1
+    self.assertEqual(v, 3.4)
+AssertionError: 4.5 != 3.4
 
-OK
-Name          Stmts   Miss Branch BrMiss  Cover   Missing
----------------------------------------------------------
-Netflix          22      0      6      0   100%   
-TestNetflix     101      1      2      1    98%   166
----------------------------------------------------------
-TOTAL           123      1      8      1    98%   
+======================================================================
+FAIL: test_eval_2 (__main__.TestNetflix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "TestNetflix.py", line 107, in test_eval_2
+    self.assertEqual(v, 4.1)
+AssertionError: 4.5 != 4.1
+
+======================================================================
+FAIL: test_eval_3 (__main__.TestNetflix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "TestNetflix.py", line 111, in test_eval_3
+    self.assertEqual(v, 4.3)
+AssertionError: 4.5 != 4.3
+
+======================================================================
+FAIL: test_eval_4 (__main__.TestNetflix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "TestNetflix.py", line 115, in test_eval_4
+    self.assertEqual(v, 1.4)
+AssertionError: 4.5 != 1.4
+
+======================================================================
+FAIL: test_solve_2 (__main__.TestNetflix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "TestNetflix.py", line 151, in test_solve_2
+    self.assertEqual(w.getvalue(), "10851:\n4.3\n1.4\n2.8\n")
+AssertionError: '10851:\n4.5\n4.5\n4.5\n' != '10851:\n4.3\n1.4\n2.8\n'
+  10851:
+- 4.5
+?   ^
++ 4.3
+?   ^
+- 4.5
+- 4.5
++ 1.4
++ 2.8
+
+
+======================================================================
+FAIL: test_solve_3 (__main__.TestNetflix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "TestNetflix.py", line 157, in test_solve_3
+    self.assertEqual(w.getvalue(), "2043:\n3.4\n4.1\n1.9\n")
+AssertionError: '2043:\n4.5\n4.5\n4.5\n' != '2043:\n3.4\n4.1\n1.9\n'
+  2043:
++ 3.4
+- 4.5
+?   ^
++ 4.1
+?   ^
++ 1.9
+- 4.5
+- 4.5
+
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.005s
+
+FAILED (failures=6)
