@@ -31,12 +31,6 @@ class TestNetflix (TestCase) :
         self.assertEqual(i,  1)
         self.assertEqual(j, 10)
 
-    def test_read_2 (self) :
-        s    = "35 100 20 150\n"
-        i, j = netflix_read(s)
-        self.assertEqual(i,  35)
-        self.assertEqual(j, 100)
-
     # ----
     # eval
     # ----
@@ -49,9 +43,6 @@ class TestNetflix (TestCase) :
         v = netflix_eval(100, 200)
         self.assertEqual(v, 125)
 
-    def test_eval_3 (self) :
-        v = netflix_eval(201, 210)
-        self.assertEqual(v, 89)
 
     # -----
     # print
