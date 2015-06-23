@@ -49,6 +49,17 @@ RunNetflix.out: RunNetflix.py
 	./RunNetflix.py < RunNetflix.in > RunNetflix.out
 	cat RunNetflix.out
 
+run:
+	RunNetflix.py < RunNetflix.in
+
+probe:
+	RunNetflix.py < probe.txt
+
+time1:
+	time RunNetflix.py < RunNetflix.in
+
+time2:
+	time RunNetflix.py < probe.txt
 TestNetflix.out: TestNetflix.py
 	coverage3 run    --branch TestNetflix.py >  TestNetflix.out 2>&1
 	coverage3 report -m                      >> TestNetflix.out
