@@ -15,8 +15,8 @@ total_viewer = 0
 
 avg_avg_movies = 3.2281371945
 avg_avg_customer = 3.67413045111
-avg_movies_rate = {}
-avg_customer_rate = {}
+movie_avg = {}
+viewer_avg = {}
 expected = {}
 
 #avg_movies_rate = {"2043":3.7776648456358783, "10851":3.8544080604534003, "4610": 3.4409799554565703, "7168": 3.885803851321093, "461": 3.46875, "7057": 4.702611063648014, "7167": 2.3421052631578947}
@@ -79,56 +79,27 @@ def netflix_eval (i, j):
     j customer_id
     return rating
     
-    avg_movies = avg_movies_rate[str(i)]
-    rating = 0
-    if(j != 0) :
-        avg_personal = avg_customer_rate[str(j)]
-        expected_rate = expected[str(i)][str(j)]
-        diff = avg_movies - avg_personal
-
-        if (diff > 0.1):
-            rating = int(avg_movies)
-
-        print(diff, expected_rate, rating)
-        #print(avg_movies, avg_personal, expected[str(i)][str(j)])
     """
+    v_id = str(j)
+    m_id = str(i)
+    rating = 0
 
-    avg_movies = avg_movies_rate[str(i)]
-    rating = avg_movies
-    diff = 0
-    movies_quality = ""
-    viewer_quality = ""
+    movies_diff = movie_avg[m_id]-avg_avg_movies
 
-    movies_factor = 0
-    viewer_factor = 0
+    rating = viewer_avg[v_id][0] + viewer_avg[v_id][1]/200
+    rating += movie_avg[m_id] + movies_diff/2
+    rating /= 2
 
-    
-    if(j != 0) :
-
-        avg_personal = avg_customer_rate[str(j)]
-        expected_rate = expected[str(i)][str(j)]
-        #diff = round(sqrt(square(avg_avg_customer - avg_personal)),2)               # how different from other people
-        rating = round(avg_movies,3)
-        diff = (avg_personal - avg_avg_customer)
-        movies_diff = (avg_movies - avg_avg_movies)
-
-        if(round(movies_diff,3) < 0):
-            movies_quality = "bad"
-            rating -= diff/10 + movies_diff/10
-        elif(round(movies_diff,3) == 0):
-            movies_quality = "average"
-        else:
-            movies_quality = "good"
-            rating += diff/10 + movies_diff/10
-        if(rating > 5):
-            rating = 5.0
-
-    
+    if (rating > 5.0):
+        rating = 5.0
+    elif (rating < 0.0):
+        rating = 0.0
+        
         #print(i,"\t",movies_quality,"\t\t   ", avg_personal,"\t", movies_diff, "  \t\t",diff, "   \t\t",round(rating,1), "\t\t",expected_rate)
         #print("------------------------------------------------------------------------------------------------------------")
     
-
-
+    
+    #print(i,j,round(rating, 1), expected[str(i)][str(j)])
     return round(rating, 1)
 
 
@@ -136,12 +107,13 @@ def netflix_eval (i, j):
 # netflix_rmse
 # ------------
 
-def netflix_rmse (i, j, v):
+def netflix_rmse (error_generator):
     """
     i movies_id
     j customer_id
     return rating
     """
+    '''
     global total_viewer
     square_error = 0
     if(j!=0):
@@ -151,7 +123,18 @@ def netflix_rmse (i, j, v):
         #print(v, expected_rate, square_error)
 
     #return sqrt(mean(square(subtract(i, j))))
-    return square_error
+    '''
+    global total_viewer
+    #square_error = list(((i,j,square(v-expected[str(i)][str(j)])) for i,j,v in rating_generator if j!=0))
+    rmse = 0
+    for i,j,k in error_generator:
+        #print(i,j,k)
+        if (j!=0):
+            total_viewer+=1
+            rmse+=square(v-expected[str(i)][str(j)])
+
+
+    return sqrt(rmse/total_viewer)
 
 # -------------
 # netflix_print
@@ -166,10 +149,13 @@ def netflix_print (w, i, j, v) :
     v rating
     """
 
+    
     if (j == 0) :
         w.write(str(i) + ":\n")
     else :
         w.write(str(v) + "\n")
+    
+
 
 # -------------
 # netflix_solve
@@ -180,24 +166,37 @@ def netflix_solve (r, w) :
     r a reader
     w a writer
     """
-    global avg_movies_rate
-    global avg_customer_rate
+    global movie_avg
+    global viewer_avg
     global expected
-    avg_customer_rate = json_cache('http://www.cs.utexas.edu/users/ebanner/netflix-tests/ezo55-Average_Viewer_Rating_Cache.json')
-    avg_movies_rate = json_cache('http://www.cs.utexas.edu/users/ebanner/netflix-tests/BRG564-Average_Movie_Rating_Cache.json')
+    #avg_customer_rate = json_cache('http://www.cs.utexas.edu/users/ebanner/netflix-tests/ezo55-Average_Viewer_Rating_Cache.json')
+    movie_avg = json_cache('http://www.cs.utexas.edu/users/ebanner/netflix-tests/BRG564-Average_Movie_Rating_Cache.json')
     expected = json_cache('http://www.cs.utexas.edu/users/ebanner/netflix-tests/pam2599-probe_solutions.json')
-
+    viewer_avg = json_cache('http://www.cs.utexas.edu/~ebanner/netflix-tests/ezo55-Average_Viewer_Rating_And_True_Variance_Cache.json')
     #a = [0,3.4,1.3,4.3,0,3.2,4.4,4.8]
-    sq_error = 0
+    #sq_error = 0
     #print("m_id\tmovies_qual\tc_id\t\tviewer_qual\t\tdiff\t\trating\t\texpected_rate")
     #counter = 0
+
+    rating_generator = list(((i,j,(netflix_eval(i,j))) for i, j in (netflix_read(s) for s in r)))
+    #square_error = list(((i,j,square(v-expected[str(i)][str(j)])) for i,j,v in rating_generator if j!=0))
+
+    for i,j,v in rating_generator:
+        netflix_print(w,i,j,v)
+    '''
     for s in r :
         i, j = netflix_read(s)
         v = netflix_eval(i, j)
         #v = a[counter]
-        sq_error += netflix_rmse(i,j,v)
-        
+        #sq_error += netflix_rmse(i,j,v)
+        #error += [netflix_rmse(i,j,v),]
+        error = ((i,j,v) for s in r)
         #counter+=1
         #netflix_print (w, i, j, v)
-    rmse = sqrt(sq_error/total_viewer)
-    print("RMSE:", rmse)
+    '''
+    #rmse = netflix_rmse(square_error)
+    rmse = netflix_rmse(rating_generator)
+    #rmse = sqrt(sq_error/total_viewer)
+    #print("RMSE:", round(rmse,2), round(rmse,5))
+    w.write("RMSE: "+str(round(rmse,2)))
+
