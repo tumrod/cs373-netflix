@@ -14,14 +14,18 @@
 
 from io       import StringIO
 from unittest import main, TestCase
-from Netflix import netflix_read, netflix_eval, netflix_print, netflix_solve
+from Netflix import netflix_read, netflix_eval, netflix_print, netflix_solve, netflix_init
+
+movie_avg = {}
+viewer_avg = {}
+expected = {}
 
 # -----------
 # TestNetflix
 # -----------
 
 class TestNetflix (TestCase) :
-
+    netflix_init()
     # ----
     # read
     # ----
@@ -99,20 +103,20 @@ class TestNetflix (TestCase) :
     # ----
     
     def test_eval_1 (self) :
-        v = netflix_eval(2043, 1417435)
+        v = netflix_eval(10035, 1651047)
         self.assertEqual(v, 3.4)
 
     def test_eval_2 (self) :
         v = netflix_eval(2043, 2312054)
-        self.assertEqual(v, 4.1)
-
-    def test_eval_3 (self) :
-        v = netflix_eval(10851, 1417435)
         self.assertEqual(v, 4.3)
 
+    def test_eval_3 (self) :
+        v = netflix_eval(10851, 1050707)
+        self.assertEqual(v, 3.8)
+
     def test_eval_4 (self) :
-        v = netflix_eval(10851, 2312054)
-        self.assertEqual(v, 1.4)
+        v = netflix_eval(10851, 514376)
+        self.assertEqual(v, 3.8)
 
 
     # -----
@@ -139,22 +143,26 @@ class TestNetflix (TestCase) :
     # -----
 
     def test_solve_1 (self) :
-        r = StringIO("1:\n10233\n10044\n2:\n21550\n")
+        #netflix_init()
+
+        r = StringIO("10035:\n1651047\n811486\n10059:\n962754\n")
         w = StringIO()
         netflix_solve(r, w)
-        self.assertEqual(w.getvalue(), "1:\n4.5\n4.5\n2:\n4.5\n")
+        self.assertEqual(w.getvalue(), "10035:\n3.4\n4.4\n10059:\n962754\n")
 
     def test_solve_2 (self) :
-        r = StringIO("10851:\n1417435\n2312054\n462685\n")
+        #netflix_init()
+        r = StringIO("10851:\n114662\n1848428\n256189\n")
         w = StringIO()
         netflix_solve(r, w)
         self.assertEqual(w.getvalue(), "10851:\n4.3\n1.4\n2.8\n")
 
     def test_solve_3 (self) :
-        r = StringIO("2043:\n1417435\n2312054\n462685\n")
+        #netflix_init()
+        r = StringIO("1006:\n1004708\n762076\n1403722\n")
         w = StringIO()
         netflix_solve(r, w)
-        self.assertEqual(w.getvalue(), "2043:\n3.4\n4.1\n1.9\n")
+        self.assertEqual(w.getvalue(), "1006:\n1004708\n762076\n1403722\n")
 
 # ----
 # main

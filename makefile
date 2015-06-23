@@ -59,7 +59,7 @@ time1:
 	time RunNetflix.py < RunNetflix.in
 
 time2:
-	time RunNetflix.py < probe.txt
+	time RunNetflix.py < probe.txt > probe.out
 TestNetflix.out: TestNetflix.py
 	coverage3 run    --branch TestNetflix.py >  TestNetflix.out 2>&1
 	coverage3 report -m                      >> TestNetflix.out

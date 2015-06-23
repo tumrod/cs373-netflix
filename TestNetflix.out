@@ -1,0 +1,83 @@
+.....FF...FFF
+======================================================================
+FAIL: test_print_2 (__main__.TestNetflix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "TestNetflix.py", line 134, in test_print_2
+    self.assertEqual(w.getvalue(), "10851:\n")
+AssertionError: '' != '10851:\n'
++ 10851:
+
+
+======================================================================
+FAIL: test_print_3 (__main__.TestNetflix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "TestNetflix.py", line 139, in test_print_3
+    self.assertEqual(w.getvalue(), "2041:\n")
+AssertionError: '' != '2041:\n'
++ 2041:
+
+
+======================================================================
+FAIL: test_solve_1 (__main__.TestNetflix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "TestNetflix.py", line 151, in test_solve_1
+    self.assertEqual(w.getvalue(), "10035:\n3.4\n4.4\n10059:\n962754\n")
+AssertionError: '3.4\n4.4\n2.1\n' != '10035:\n3.4\n4.4\n10059:\n962754\n'
++ 10035:
+  3.4
+  4.4
+- 2.1
++ 10059:
++ 962754
+
+
+======================================================================
+FAIL: test_solve_2 (__main__.TestNetflix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "TestNetflix.py", line 158, in test_solve_2
+    self.assertEqual(w.getvalue(), "10851:\n4.3\n1.4\n2.8\n")
+AssertionError: '4.1\n4.1\n3.9\n' != '10851:\n4.3\n1.4\n2.8\n'
++ 10851:
+- 4.1
+?   ^
++ 4.3
+?   ^
+- 4.1
+- 3.9
++ 1.4
++ 2.8
+
+
+======================================================================
+FAIL: test_solve_3 (__main__.TestNetflix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "TestNetflix.py", line 165, in test_solve_3
+    self.assertEqual(w.getvalue(), "1006:\n1004708\n762076\n1403722\n")
+AssertionError: '4.1\n4.2\n3.8\n' != '1006:\n1004708\n762076\n1403722\n'
+- 4.1
+- 4.2
+- 3.8
++ 1006:
++ 1004708
++ 762076
++ 1403722
+
+
+----------------------------------------------------------------------
+Ran 13 tests in 5.801s
+
+FAILED (failures=5)
+10851:
+2041:
+10035:
+10059:
+RMSE: 0.49
+10851:
+RMSE: 1.32
+1006:
+RMSE: 0.31
