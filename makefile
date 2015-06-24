@@ -60,8 +60,9 @@ time1:
 
 time2:
 	time RunNetflix.py < probe.txt > probe.out
+
 TestNetflix.out: TestNetflix.py
 	coverage3 run    --branch TestNetflix.py >  TestNetflix.out 2>&1
-	coverage3 report -m                      >> TestNetflix.out
+	coverage3 report --omit=/v/filer4b/v38q001/tumrod/.local/lib/python3.4/site-packages/numpy/* -m >> TestNetflix.out
 	cat TestNetflix.out
 

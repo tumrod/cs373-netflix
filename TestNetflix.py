@@ -14,7 +14,7 @@
 
 from io       import StringIO
 from unittest import main, TestCase
-from Netflix import netflix_read, netflix_eval, netflix_print, netflix_solve, netflix_init
+from Netflix import netflix_read, netflix_eval, netflix_print, netflix_solve, netflix_init, netflix_rmse
 
 movie_avg = {}
 viewer_avg = {}
@@ -25,7 +25,15 @@ expected = {}
 # -----------
 
 class TestNetflix (TestCase) :
+
+
+    # ----
+    # init
+    # ----
+
     netflix_init()
+
+    
     # ----
     # read
     # ----
@@ -118,6 +126,35 @@ class TestNetflix (TestCase) :
         v = netflix_eval(10851, 514376)
         self.assertEqual(v, 3.8)
 
+    def test_eval_5 (self) :                      
+        v = netflix_eval(14961, 1143187)
+        self.assertEqual(v, 5.0)
+
+
+    # ------------
+    # netflix_rmse
+    # ------------
+
+    def test_rmse_1 (self) :
+        num_list = [(10005, 793736, 3.3), (10005, 926698, 3.3), (10006, 0, 0), (10006, 1093333, 3.6), (10006, 1982605, 3.3)]
+        rmse = netflix_rmse(num_list)
+        self.assertEqual(rmse, str(0.95))
+
+    def test_rmse_2 (self) :
+        num_list = ((10008, 1813636, 4.3), (10008, 2048630, 3.5), (10008, 930946, 3.7), (1001, 1050889, 4.0))
+        rmse = netflix_rmse(num_list)
+        self.assertEqual(rmse, str(0.71))
+
+    def test_rmse_3 (self) :
+        num_list = {(1006, 0, 0), (1006, 1004708, 4.1), (1006, 762076, 4.2), (1006, 1403722, 3.8)}
+        rmse = netflix_rmse(num_list)
+        self.assertEqual(rmse, str(0.54))        
+
+    def test_rmse_4 (self) :
+        num_list = [(10035, 1651047, 3.4), (10035, 811486, 4.4), (10059, 962754, 2.1)]
+        rmse = netflix_rmse(num_list)
+        self.assertEqual(rmse, str(0.49))            
+
 
     # -----
     # print
@@ -143,26 +180,23 @@ class TestNetflix (TestCase) :
     # -----
 
     def test_solve_1 (self) :
-        #netflix_init()
 
         r = StringIO("10035:\n1651047\n811486\n10059:\n962754\n")
         w = StringIO()
         netflix_solve(r, w)
-        self.assertEqual(w.getvalue(), "10035:\n3.4\n4.4\n10059:\n962754\n")
+        self.assertEqual(w.getvalue(), "10035:\n3.4\n4.4\n10059:\n2.1\nRMSE: 0.49")
 
     def test_solve_2 (self) :
-        #netflix_init()
-        r = StringIO("10851:\n114662\n1848428\n256189\n")
+        r = StringIO("10008:\n1813636\n2048630\n930946\n1001:\n1050889\n67976\n1025642\n")
         w = StringIO()
         netflix_solve(r, w)
-        self.assertEqual(w.getvalue(), "10851:\n4.3\n1.4\n2.8\n")
+        self.assertEqual(w.getvalue(), "10008:\n4.3\n3.5\n3.7\n1001:\n4.0\n3.5\n3.3\nRMSE: 0.93")
 
     def test_solve_3 (self) :
-        #netflix_init()
         r = StringIO("1006:\n1004708\n762076\n1403722\n")
         w = StringIO()
         netflix_solve(r, w)
-        self.assertEqual(w.getvalue(), "1006:\n1004708\n762076\n1403722\n")
+        self.assertEqual(w.getvalue(), "1006:\n4.1\n4.2\n3.8\nRMSE: 0.54")
 
 # ----
 # main
@@ -171,25 +205,3 @@ class TestNetflix (TestCase) :
 if __name__ == "__main__" :
     main()
 
-"""
-% coverage3 run --branch TestCollatz.py >  TestCollatz.out 2>&1
-
-
-
-% coverage3 report -m                   >> TestCollatz.out
-
-
-
-% cat TestCollatz.out
-.......
-----------------------------------------------------------------------
-Ran 7 tests in 0.001s
-
-OK
-Name          Stmts   Miss Branch BrMiss  Cover   Missing
----------------------------------------------------------
-Collatz          18      0      6      0   100%
-TestCollatz      33      1      2      1    94%   79
----------------------------------------------------------
-TOTAL            51      1      8      1    97%
-"""
