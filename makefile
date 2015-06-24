@@ -1,5 +1,7 @@
 FILES :=                              \
     .travis.yml                       \
+    .gitignore							\
+    makefile							\
     netflix-tests/tu564-RunNetflix.in   \
     netflix-tests/tu564-RunNetflix.out  \
     netflix-tests/tu564-TestNetflix.py  \
