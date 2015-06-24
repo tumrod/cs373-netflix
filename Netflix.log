@@ -1,3 +1,15 @@
+commit 7af63f60e807263634daf8e1b2ab40978a98edfd
+Author: Tipparat Umrod <tipparat.umrod@utexas.edu>
+Date:   Tue Jun 23 21:37:39 2015 -0500
+
+    debug Travis CI
+
+commit c04b49b257a67fd15a454c8e4d96e72bfa72fa60
+Author: Tipparat Umrod <tipparat.umrod@utexas.edu>
+Date:   Tue Jun 23 21:22:49 2015 -0500
+
+    create log closed #10
+
 commit 40c56f32ef0bb97c284ca8dc6bc1d2c81f8484c7
 Author: Tipparat Umrod <tipparat.umrod@utexas.edu>
 Date:   Tue Jun 23 21:08:26 2015 -0500
