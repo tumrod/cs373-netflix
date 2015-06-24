@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module Netflix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>Netflix</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/v/filer4b/v38q001/tumrod/classes/cs373-netflix/Netflix.py">/v/filer4b/v38q001/tumrod/classes/cs373-netflix/Netflix.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;---------------------------<br>
+#&nbsp;tumrod/cs373-netflix/Netflix.py<br>
+#&nbsp;Copyright&nbsp;(C)&nbsp;2015<br>
+#&nbsp;Tipparat&nbsp;Umrod<br>
+#&nbsp;---------------------------</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="json.html">json</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-json_cache"><strong>json_cache</strong></a>(file_url)</dt><dd><tt>input&nbsp;file_url,&nbsp;cache&nbsp;file&nbsp;in&nbsp;.json<br>
+return&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;cache</tt></dd></dl>
+ <dl><dt><a name="-netflix_eval"><strong>netflix_eval</strong></a>(i, j)</dt><dd><tt>i&nbsp;movies_id<br>
+j&nbsp;customer_id<br>
+return&nbsp;rating&nbsp;with&nbsp;1&nbsp;decimal&nbsp;place</tt></dd></dl>
+ <dl><dt><a name="-netflix_init"><strong>netflix_init</strong></a>()</dt><dd><tt>init&nbsp;all&nbsp;of&nbsp;the&nbsp;cache&nbsp;by&nbsp;calling&nbsp;<a href="#-json_cache">json_cache</a>(cache_url)</tt></dd></dl>
+ <dl><dt><a name="-netflix_print"><strong>netflix_print</strong></a>(w, i, j, v)</dt><dd><tt>print&nbsp;three&nbsp;ints<br>
+w&nbsp;a&nbsp;writer<br>
+i&nbsp;movies_id<br>
+j&nbsp;customer_id<br>
+v&nbsp;rating</tt></dd></dl>
+ <dl><dt><a name="-netflix_read"><strong>netflix_read</strong></a>(s)</dt><dd><tt>read&nbsp;an&nbsp;int<br>
+s&nbsp;a&nbsp;string<br>
+&nbsp;<br>
+set&nbsp;movies_id&nbsp;to&nbsp;global&nbsp;if&nbsp;read&nbsp;movies_id<br>
+get&nbsp;customer_id<br>
+return&nbsp;a&nbsp;list&nbsp;of&nbsp;movies_id,&nbsp;customer_id&nbsp;pair</tt></dd></dl>
+ <dl><dt><a name="-netflix_rmse"><strong>netflix_rmse</strong></a>(rating_iterable)</dt><dd><tt>taking&nbsp;in&nbsp;an&nbsp;iterable<br>
+return&nbsp;truncated&nbsp;root&nbsp;mean&nbsp;square&nbsp;error</tt></dd></dl>
+ <dl><dt><a name="-netflix_solve"><strong>netflix_solve</strong></a>(r, w)</dt><dd><tt>r&nbsp;a&nbsp;reader<br>
+w&nbsp;a&nbsp;writer</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>avg_avg_movies</strong> = 3.2281371945<br>
+<strong>expected</strong> = {}<br>
+<strong>movie_avg</strong> = {}<br>
+<strong>movies_id</strong> = 0<br>
+<strong>sqrt</strong> = &lt;ufunc 'sqrt'&gt;<br>
+<strong>square</strong> = &lt;ufunc 'square'&gt;<br>
+<strong>subtract</strong> = &lt;ufunc 'subtract'&gt;<br>
+<strong>viewer_avg</strong> = {}</td></tr></table>
+</body></html>
