@@ -189,5 +189,5 @@ def netflix_solve (r, w) :
 
     rmse = netflix_rmse(rating_generator)
 
-    w.write("RMSE: "+rmse)
+    w.write("RMSE: "+rmse+"\n")
 
